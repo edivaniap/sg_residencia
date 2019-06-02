@@ -1,0 +1,122 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>
+    <title>SGR</title>
+  </head>
+
+  <body>
+    <header id="header">
+      <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <h3><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Sistema de Gerenciamento de Residentes</h3>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <h3><a class="glyphicon glyphicon-log-out" href="login.html" aria-hidden="true">Sair </a></h3>
+          </ul>
+        </div>
+    </header>
+
+    <section id="breadcrumb">
+      <div class="container">
+        <ol class="breadcrumb">
+          <li><a href="admin.html">Administrador</a></li>
+          <li><a href="solicitacoes.html">Gerenciar Solicitações</a></li>
+          <li class="active">Em Andamento</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+              <img class="img-responsive" src="imgs/avatar2.png" alt>
+            <div class="list-group">
+              <a href="admin.html" class="list-group-item active main-color-bg">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Olá, Administrador
+              </a>
+              <a href="residencias.html" class="list-group-item"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Gerenciar Residências</a>
+              <a href="residentes.html" class="list-group-item"><span class="glyphicon glyphicon-user " aria-hidden="true"></span> Gerenciar Residentes </a>
+              <a href="solicitacoes.html" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Gerenciar Solicitações</a>
+            </div>
+
+        </div>
+
+          <div class="col-md-9">
+            <!-- Website Overview -->
+            <div class="panel panel-default">
+              <div class="panel-heading main-color-bg">
+                <h3 class="panel-title">Pendentes</h3>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-8">
+                    <input class="form-control" type="text" placeholder="Filtrar...">
+                  </div>
+
+                </div>
+
+                <br>
+
+                <table class="table table-striped table-hover">
+                  <tr>
+                    <th>Tipo</th>
+                    <th>Residência</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Manutenção</td>
+                    <td>Campus I</td>
+                    <td><a class="btn btn-default" href="visualizarAndamento.html">Visualizar</a><a class="btn btn-default" href="alterarStatus.html">Alterar Status</a></td>
+                  </tr>
+                  <tr>
+                    <td>Suporte</td>
+                    <td>Campus II</td>
+                    <td><a class="btn btn-default" href="visualizarAndamento.html">Visualizar</a><a class="btn btn-default" href="alterarStatus.html">Alterar Status</a></td>
+                  </tr>
+                  <tr>
+                    <td>Material Mensal</td>
+                    <td>Campus III</td>
+                    <td><a class="btn btn-default" href="visualizarAndamento.html">Visualizar</a><a class="btn btn-default" href="alterarStatus.html">Alterar Status</a></td>
+                  </tr>
+                  <tr>
+                    <td>Manutenção</td>
+                    <td>Campus II</td>
+                    <td><a class="btn btn-default" href="visualizarAndamento.html">Visualizar</a><a class="btn btn-default" href="alterarStatus.html">Alterar Status</a></td>
+                  </tr>
+                  <tr>
+                    <td>Suporte</td>
+                    <td>BioMedica</td>
+                    <td><a class="btn btn-default" href="visualizarAndamento.html">Visualizar</a><a class="btn btn-default" href="alterarStatus.html">Alterar Status</a></td>
+                  </tr>
+              </table>
+
+              </div>
+            </div>
+
+            </div>
+        </div>
+      </div>
+    </section>
+
+    < <footer id="footer">
+      <p>Desenvolvimento de Sistemas Web I, &copy; 2019</p>
+    </footer>
+
+    <!-- Modals -->
+
+    <!-- Add Page Modal -->
+
+
+    <script>
+      CKEDITOR.replace( 'editor1' );
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
