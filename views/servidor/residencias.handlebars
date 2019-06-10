@@ -27,7 +27,7 @@
           <!-- Website Overview -->
           <div class="panel panel-default">
             <div class="panel-heading main-color-bg">
-              <h3 class="panel-title">Residências</h3>
+              <h2 class="panel-title">Residências</h2>
             </div>
             <div class="panel-body">
               <div class="row">
@@ -43,16 +43,41 @@
 
               <table class="table table-striped table-hover">
                 {{#each residencias}}
+                <!-- Linhas com cada residencia -->
                 <tr>
                   <td>
                     {{nome}}
                   </td>
                   <td>
-                    <a class="btn btn-default" href="/servidor/residencias/visualizar/{{_id}}">Visualizar</a>
+                    <button class="btn btn-default" data-toggle="modal" data-target="#myModal{{_id}}">Visualizar</button>
                     <a class="btn btn-default" href="/servidor/residencias/editar/{{_id}}">Editar</a>
                     <a class="btn btn-danger" href="/servidor/residencias/deletar/{{_id}}">Deletar</a>
                   </td>
                 </tr>
+                <!-- Modal com detalhes de cada residencia -->
+                <div class="modal fade" id="myModal{{_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">{{nome}}</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p><b>Endereço: </b>{{endereco}}</p>
+                        <small class="font-italic text-right"><b>Data de criação: </b>{{criacao}}</small>
+                        <br>
+                        <small><b>Ultima atualização: </b>{{atualizacao}}</small>
+                      </div>
+                      <div class="modal-footer">
+                        <a class="btn btn-default" href="/servidor/residencias/editar/{{_id}}">Editar</a>
+                        <a class="btn btn-danger" href="/servidor/residencias/deletar/{{_id}}">Deletar</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- fim modal -->
                 {{else}}
                 <tr>
                   <td>Nenhuma residência registrada</td>
