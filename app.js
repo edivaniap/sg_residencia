@@ -6,6 +6,25 @@ const mongoose = require("mongoose")
 const app = express()
 const servidor = require("./routes/servidor")
 const path = require("path")
+const session = require("express-session")
+const flash = require("connect-flash")
+
+/* CONFIG SESSÃO */
+app.use(session({
+  secret: "projetoweb20191bti",
+  resave: true,
+  saveUninitialized: true
+}))
+
+/* CONFIG FLASH */
+app.use(flash())
+
+/* MIDDLEWARE */
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg")
+  res.locals.error_msg = req.flash("error_msg")
+  next()
+})
 
 /* CONFIG TEMPLATE ENGINE */
 app.engine("handlebars", handlebars({defaultLayout: "main"}))

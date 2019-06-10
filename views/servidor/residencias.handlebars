@@ -35,47 +35,33 @@
                   <input class="form-control" type="text" placeholder="Filtrar Residência...">
                 </div>
                 <div class="col-md-2" >
-                  <a class="btn btn-primary  pull-righ" href="cadastroResidencia.html">Adicionar</a>
+                  <a class="btn btn-primary  pull-righ" href="./residencias/adicionar">Adicionar</a>
                 </div>
               </div>
 
               <br>
 
               <table class="table table-striped table-hover">
+                {{#each residencias}}
                 <tr>
-                  <th>Nome</th>
-                  <th></th>
+                  <td>
+                    {{nome}}
+                  </td>
+                  <td>
+                    <a class="btn btn-default" href="/servidor/residencias/visualizar/{{_id}}">Visualizar</a>
+                    <a class="btn btn-default" href="/servidor/residencias/editar/{{_id}}">Editar</a>
+                    <a class="btn btn-danger" href="/servidor/residencias/deletar/{{_id}}">Deletar</a>
+                  </td>
                 </tr>
+                {{else}}
                 <tr>
-                  <td>Campus I</td>
-                  <td><a class="btn btn-default" href="visualizar.html">Visualizar</a><a class="btn btn-default" href="edit.html">Editar</a> <a class="btn btn-danger" href="#">Deletar</a></td>
+                  <td>Nenhuma residência registrada</td>
+                  <td> </td>
                 </tr>
-                <tr>
-                  <td>Campus II</td>
-                  <td><a class="btn btn-default" href="edit.html">Visualizar</a><a class="btn btn-default" href="edit.html">Editar</a> <a class="btn btn-danger" href="#">Deletar</a></td>
-                </tr>
-                <tr>
-                  <td>Campus II</td>
-                  <td><a class="btn btn-default" href="edit.html">Visualizar</a><a class="btn btn-default" href="edit.html">Editar</a> <a class="btn btn-danger" href="#">Deletar</a></td>
-                </tr>
-                <tr>
-                  <td>Campus III</td>
-                  <td><a class="btn btn-default" href="edit.html">Visualizar</a><a class="btn btn-default" href="edit.html">Editar</a> <a class="btn btn-danger" href="#">Deletar</a></td>
-                </tr>
-                <tr>
-                  <td>Campus IV</td>
-                  <td><a class="btn btn-default" href="edit.html">Visualizar</a><a class="btn btn-default" href="edit.html">Editar</a> <a class="btn btn-danger" href="#">Deletar</a></td>
-                </tr>
-                <tr>
-                  <td>BioMedica</td>
-                  <td><a class="btn btn-default" href="edit.html">Visualizar</a><a class="btn btn-default" href="edit.html">Editar</a> <a class="btn btn-danger" href="#">Deletar</a></td>
-                </tr>
-
+                {{/each}}
               </table>
-
             </div>
           </div>
-
           </div>
       </div>
     </div>
