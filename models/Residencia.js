@@ -10,6 +10,10 @@ const Residencia = new Schema({
     type: String,
     required: true
   },
+  quartos: {
+    type:[Schema.Types.ObjectId],
+    ref: "quartos"
+  },
   criacao: {
     type: Date,
     default: Date.now()

@@ -5,7 +5,7 @@ const router = express.Router()
 
 /* Home */
 router.get("/", (req, res) => {
-  res.render("servidor/index")
+  res.render("servidor/home")
 })
 
 /* Gerencia de residencias */
@@ -13,6 +13,8 @@ const ger_residencias = require("./ger_residencias")
 router.use("/residencias", ger_residencias)
 
 /* Gerencia de residentes */
+const ger_residentes = require("./ger_residentes")
+router.use("/residentes", ger_residentes)
 
 /* Gerencia de solicitacoes */
 

@@ -5,12 +5,14 @@ const mongoose = require("mongoose")
 /* CARREGANDO MODELS */
 require("../models/Residencia")
 const Residencia = mongoose.model("residencias")
+require("../models/Quarto")
+const Quarto = mongoose.model("quartos")
 
 /* ROTAS */
 
 /* Gerencia de residencias */
 router.get("/", (req, res) => {
-  Residencia.find().sort({criacao: "desc"}).then((residencias) => {
+  Residencia.find().populate({path: "quartos", model: Quarto}).sort({criacao: "desc"}).then((residencias) => {
     res.render("servidor/residencias", {residencias: residencias})
   }).catch((err) => {
     req.flash("error_msg", "Erro ao tentar listar as residencias: " + err)
@@ -106,6 +108,58 @@ router.get("/deletar/:id", (req, res) => {
     res.redirect("/servidor/residencias")
   })
 })
+
+router.get("/adicionar_quarto/:id", (req, res) => {
+    Residencia.findOne({_id: req.params.id}).then((residencia) => {
+    res.render("servidor/addquarto", {residencia: residencia})
+  }).catch((err) => {
+    req.flash("error_msg", "Erro ao tentar encontrar residencia para adição de quarto: " + err)
+    res.redirect("/servidor/residencias")
+  })
+})
+
+/* cadastra a residencia no banco */
+router.post("/adicionar_quarto", (req, res) => {
+  var erros = []
+
+  if(!req.body.titulo || typeof req.body.titulo == undefined || req.body.titulo == null) {
+    erros.push({texto: "Titulo invalido"})
+  }
+
+  if(!req.body.capacidade || typeof req.body.capacidade == undefined || req.body.capacidade == null) {
+    erros.push({texto: "Capacidade invalida"})
+  }
+
+  if(erros.length > 0) {
+    res.render("servidor/addquarto", {erros: erros})
+  } else {
+    const novoQuarto = {
+      titulo: req.body.titulo,
+      capacidade: req.body.capacidade,
+      sexo: req.body.sexo,
+      residencia: req.body.id_residencia
+    }
+
+    new Quarto(novoQuarto).save().then((lastQuarto) => {
+      /***** adicionando quarto a residencia *****/
+      Residencia.findOne({_id: lastQuarto.residencia}).then((residencia) => {
+        residencia.quartos.push(lastQuarto)
+        residencia.save().catch((err) => {
+          req.flash("error_msg", "Erro ao tentar salvar quarto na da residência: " + err)
+          res.redirect("/servidor/residencias")
+        })
+      })
+      /***************************/
+
+      req.flash("success_msg", "Quarto adicionado com sucesso")
+      res.redirect("/servidor/residencias")
+    }).catch((err) => {
+      req.flash("error_msg", "Erro ao tentar adicionar quarto: " + err)
+      res.redirect("/servidor/residencias")
+    })
+  }
+})
+
 /* Fim de gerencia de residencias */
 
 module.exports = router

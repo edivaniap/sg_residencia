@@ -10,6 +10,10 @@ const Usuario = new Schema({
     type: String,
     required: true
   },
+  sexo: {
+    type: String,
+    required: true
+  },
   matricula: {
     type: String,
     required: true

@@ -6,14 +6,23 @@ const Residente = new Schema({
     type: Number,
     required: true
   },
+  curso: {
+    type: String,
+    required: true
+  },
   integralizacao: {
     type: Number,
-    required: true
+    required: true,
+    default: Math.random() * 100 /* temporario */
   },
   usuario: {
     type: Schema.Types.ObjectId,
     ref: "usuarios",
     required: true
+  },
+  quarto: {
+    type: Schema.Types.ObjectId,
+    ref: "quartos"
   }
 })
 
