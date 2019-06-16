@@ -13,7 +13,7 @@ const Residente = new Schema({
   integralizacao: {
     type: Number,
     required: true,
-    default: Math.random() * 100 /* temporario */
+    default: Math.floor(Math.random() * 100) /* temporario */
   },
   usuario: {
     type: Schema.Types.ObjectId,
@@ -23,6 +23,10 @@ const Residente = new Schema({
   quarto: {
     type: Schema.Types.ObjectId,
     ref: "quartos"
+  },
+  residencia: {
+    type: Schema.Types.ObjectId,
+    ref: "residencias"
   }
 })
 

@@ -35,7 +35,7 @@
                   <input class="form-control" type="text" placeholder="Filtrar Residente...">
                 </div>
                 <div class="col-md-2" >
-                  <a class="btn btn-primary  pull-righ" href="./residentes/adicionar">Adicionar</a>
+                  <a class="btn btn-primary  pull-righ" href="residentes/adicionar">Adicionar</a>
                 </div>
               </div>
 
@@ -52,7 +52,8 @@
                 <!-- Linhas com cada residencia -->
                 <tr>
                   <td>{{@index}}</td>
-                  <td>{{nome}}</td>
+                  <td>{{usuario.matricula }}</td>
+                  <td>{{usuario.nome}}</td>
                   <td>
                     <button class="btn btn-default" data-toggle="modal" data-target="#myModal{{_id}}">Visualizar</button>
                     <a class="btn btn-default" href="/servidor/residentes/editar/{{_id}}">Editar</a>
@@ -64,7 +65,7 @@
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h4 class="modal-title">{{nome}}</h4>
+                        <h4 class="modal-title">{{usuario.nome}}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -72,15 +73,17 @@
                       <div class="modal-body">
                         <p><b>Matrícula: </b>{{usuario.matricula}}</p>
                         <p><b>CPF: </b>{{usuario.cpf}}</p>
+                        <p><b>Email: </b>{{usuario.email}}</p>
                         <p><b>Endereço: </b>{{usuario.endereco}}</p>
-                        <p><b>Endereço: </b>{{usuario.endereco}}</p>
+                        <p><b>Sexo: </b>{{usuario.sexo}}</p>
                         <p><b>Renda: </b>{{renda}}</p>
+                        <p><b>Curso: </b>{{curso}}</p>
                         <p><b>Integralização: </b>{{integralizacao}}</p>
-                        <p><b>Alocado em: </b>{{quarto.titulo}} - {{quarto.residencia.nome}}</p>
+                        <p><b>Alocado em: </b>{{quarto.titulo}} - {{residencia.nome}}</p>
                         <br>
-                        <small class="font-italic text-right"><b>Data de criação: </b>{{criacao}}</small>
+                        <small class="font-italic text-right"><b>Data de criação: </b>{{usuario.criacao}}</small>
                         <br>
-                        <small><b>Última atualização: </b>{{atualizacao}}</small>
+                        <small><b>Última atualização: </b>{{usuario.atualizacao}}</small>
                       </div>
                       <div class="modal-footer">
                         <a class="btn btn-default" href="/servidor/residentes/editar/{{_id}}">Editar</a>

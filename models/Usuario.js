@@ -18,9 +18,14 @@ const Usuario = new Schema({
     type: String,
     required: true
   },
-  senha: {
+  email: {
     type: String,
     required: true
+  },
+  senha: {
+    type: String,
+    required: true,
+    default: "0"
   },
   endereco: {
     type: String,
