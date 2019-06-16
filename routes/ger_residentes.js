@@ -26,6 +26,21 @@ router.get("/", (req, res) => {
   })
 })
 
+router.get("/deletar/:iduser/:idresi", (req, res) => {
+  Residente.deleteOne({_id: req.params.idresi}).then(() => {
+    Usuario.deleteOne({_id: req.params.iduser}).then(() => {
+      req.flash("success_msg", "Residente deletada com sucesso")
+      res.redirect("/servidor/residentes")
+    }).catch((err) => {
+      req.flash("error_msg", "Erro ao tentar encontrar usuario de residente: " + err)
+      res.redirect("/servidor/residentes")
+    })
+  }).catch((err) => {
+    req.flash("error_msg", "Erro ao tentar encontrar residente: " + err)
+    res.redirect("/servidor/residentes")
+  })
+})
+
 /* abre formulario de cadastro de residente */
 router.get("/adicionar", (req, res) => {
   Residencia.find().populate({path: "quartos", model: Quarto}).sort({criacao: "desc"}).then((residencias) => {

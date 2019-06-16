@@ -1,6 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
-const bcryptjs = require('bcryptjs')
+const bcryptjs = require("bcryptjs")
+const passport = require("passport");
 const router = express.Router()
 
 /* CARREGANDO MODELS */
@@ -19,8 +20,20 @@ router.get("/definir_senha/:id", (req, res) => {
     res.render("residente/definirsenha", {usuario: usuario})
   }).catch((err) => {
     req.flash("error_msg", "Erro ao tentar encontrar usuário: " + err)
-    res.redirect("/")
+    res.redirect("/residente/login")
   })
+})
+
+router.get("/login", (req, res) => {
+  res.render("residente/login")
+})
+
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", {
+    successRedirect: "/residente",
+    failureRedirect: "/residente/login",
+    failureFlash: true
+  })(req, res, next)
 })
 
 router.post("/definir_senha", (req, res) => {
@@ -47,7 +60,7 @@ router.post("/definir_senha", (req, res) => {
              req.flash("error_msg", "Houve um erro ao tentar adicionar hash na senha: " + err)
              res.redirect("/")
            }
-           
+
            //se nao houver erro, salva a senha
            usuario.senha = hash
 

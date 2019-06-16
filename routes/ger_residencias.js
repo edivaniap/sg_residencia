@@ -100,7 +100,7 @@ router.post("/editar", (req, res) => {
 })
 
 router.get("/deletar/:id", (req, res) => {
-    Residencia.remove({_id: req.params.id}).then((residencia) => {
+    Residencia.deleteOne({_id: req.params.id}).then((residencia) => {
     req.flash("success_msg", "Residência deletada com sucesso")
     res.redirect("/servidor/residencias")
   }).catch((err) => {

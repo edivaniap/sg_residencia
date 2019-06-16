@@ -9,6 +9,9 @@ const residente = require("./routes/residente")
 const path = require("path")
 const session = require("express-session")
 const flash = require("connect-flash")
+const passport = require("passport");
+require("./config/authentication")(passport)
+
 
 /* CONFIG SESSÃO */
 app.use(session({
@@ -17,6 +20,10 @@ app.use(session({
   saveUninitialized: true
 }))
 
+/* CONFIG PASSPORT */
+app.use(passport.initialize())
+app.use(passport.session())
+
 /* CONFIG FLASH */
 app.use(flash())
 
@@ -24,6 +31,7 @@ app.use(flash())
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg")
   res.locals.error_msg = req.flash("error_msg")
+  res.locals.error = req.flash("error")
   next()
 })
 
@@ -47,10 +55,6 @@ mongoose.connect("mongodb://localhost/dbresidente").then(() => {
 app.use(express.static(path.join(__dirname, "public")))
 
 /* ROTAS */
-app.get("/", (req, res) => {
-  res.render("login")
-})
-
 app.use("/servidor", servidor)
 
 app.use("/residente", residente)

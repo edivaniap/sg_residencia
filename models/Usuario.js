@@ -27,6 +27,11 @@ const Usuario = new Schema({
     required: true,
     default: "0"
   },
+  eAdmin: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
   endereco: {
     type: String,
     required: true

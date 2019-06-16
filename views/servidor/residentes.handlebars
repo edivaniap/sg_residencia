@@ -57,7 +57,7 @@
                   <td>
                     <button class="btn btn-default" data-toggle="modal" data-target="#myModal{{_id}}">Visualizar</button>
                     <a class="btn btn-default" href="/servidor/residentes/editar/{{_id}}">Editar</a>
-                    <a class="btn btn-danger" href="/servidor/residentes/deletar/{{_id}}">Deletar</a>
+                    <a class="btn btn-danger" href="/servidor/residentes/deletar/{{usuario._id}}/{{_id}}">Deletar</a>
                   </td>
                 </tr>
                 <!-- Modal com detalhes de cada residencia -->
@@ -87,7 +87,7 @@
                       </div>
                       <div class="modal-footer">
                         <a class="btn btn-default" href="/servidor/residentes/editar/{{_id}}">Editar</a>
-                        <a class="btn btn-danger" href="/servidor/residentes/deletar/{{_id}}">Deletar</a>
+                        <a class="btn btn-danger" href="/servidor/residentes/deletar/{{usuario._id}}/{{_id}}">Deletar</a>
                       </div>
                     </div>
                   </div>
