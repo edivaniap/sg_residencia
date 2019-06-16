@@ -5,6 +5,7 @@ const body_parser = require("body-parser")
 const mongoose = require("mongoose")
 const app = express()
 const servidor = require("./routes/servidor")
+const residente = require("./routes/residente")
 const path = require("path")
 const session = require("express-session")
 const flash = require("connect-flash")
@@ -49,7 +50,10 @@ app.use(express.static(path.join(__dirname, "public")))
 app.get("/", (req, res) => {
   res.render("login")
 })
+
 app.use("/servidor", servidor)
+
+app.use("/residente", residente)
 
 /* LISTENER */
 const PORT = 8082
