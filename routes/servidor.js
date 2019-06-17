@@ -1,10 +1,11 @@
 const express = require("express")
 const router = express.Router()
+const {eAdmin} = require("../helpers/eAdmin")
 
 /* ROTAS */
 
 /* Home */
-router.get("/", (req, res) => {
+router.get("/", eAdmin, (req, res) => {
   res.render("servidor/home")
 })
 

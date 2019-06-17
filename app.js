@@ -32,6 +32,7 @@ app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg")
   res.locals.error_msg = req.flash("error_msg")
   res.locals.error = req.flash("error")
+  res.locals.user = req.user || null
   next()
 })
 
@@ -55,6 +56,10 @@ mongoose.connect("mongodb://localhost/dbresidente").then(() => {
 app.use(express.static(path.join(__dirname, "public")))
 
 /* ROTAS */
+app.get("/", (req, res) => {
+  res.render("index")
+})
+
 app.use("/servidor", servidor)
 
 app.use("/residente", residente)

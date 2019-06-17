@@ -28,6 +28,12 @@ router.get("/login", (req, res) => {
   res.render("residente/login")
 })
 
+router.get("/logout", (req, res) => {
+  req.logout()
+  res.redirect("/")
+})
+
+
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", {
     successRedirect: "/residente",
