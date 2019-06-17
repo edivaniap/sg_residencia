@@ -87,5 +87,4 @@ router.post("/definir_senha", (req, res) => {
   }
 })
 
-
 module.exports = router

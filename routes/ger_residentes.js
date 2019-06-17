@@ -144,4 +144,8 @@ router.post("/adicionar", (req, res) => {
   })
 })
 
+router.get("/servidor/residentes", (req, res) => {
+  res.redirect("servidor/residentes")
+})
+
 module.exports = router

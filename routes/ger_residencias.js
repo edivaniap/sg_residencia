@@ -160,6 +160,15 @@ router.post("/adicionar_quarto", (req, res) => {
   }
 })
 
+router.get("/servidor/residencias", (req, res) => {
+  res.redirect("servidor/residencias")
+})
+
+// Rota com erro !!!!!
+router.get("/servidor/solicitacoes", (req, res) => {
+  res.redirect("servidor/solicitacoes")
+})
+
 /* Fim de gerencia de residencias */
 
 module.exports = router
