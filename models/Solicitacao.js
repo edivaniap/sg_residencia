@@ -25,6 +25,21 @@ const Solicitacao = new Schema({
     ref: "residentes",
     required: true
   },
+  solicitanteResidencia: {
+    type: Schema.Types.ObjectId,
+    ref: "residencias",
+    required: true
+  },
+  solicitanteQuarto: {
+    type: Schema.Types.ObjectId,
+    ref: "quartos",
+    required: true
+  },
+  solicitanteUsuario: {
+    type: Schema.Types.ObjectId,
+    ref: "usuarios",
+    required: true
+  },
   avaliacoes: {
     type:[Schema.Types.ObjectId],
     ref: "avaliacoes"

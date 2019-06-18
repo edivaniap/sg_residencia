@@ -28,11 +28,14 @@ router.post("/solicitar", eComum, (req, res) => {
     const novaSolicitacao = {
       tipoServico: req.body.tipoServico,
       descricao: req.body.descricao,
-      solicitante: residente._id
+      solicitante: residente._id,
+      solicitanteUsuario: req.body.id_usuario,
+      solicitanteResidencia: residente.residencia,
+      solicitanteQuarto: residente.quarto
     }
 
     new Solicitacao(novaSolicitacao).save().then(() => {
-      req.flash("success_msg", "Serviço solicitado com sucesso: ")
+      req.flash("success_msg", "Serviço solicitado com sucesso ")
       res.redirect("/residente")
     }).catch((err) => {
       req.flash("error_msg", "Erro ao tentar fazer solicitacao: " + err)

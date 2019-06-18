@@ -10,6 +10,8 @@ require("../models/Residencia")
 const Residencia = mongoose.model("residencias")
 require("../models/Quarto")
 const Quarto = mongoose.model("quartos")
+require("../models/Solicitacao")
+const Solicitacao = mongoose.model("solicitacoes")
 
 /* ROTAS */
 
@@ -19,13 +21,16 @@ router.get("/", eAdmin, (req, res) => {
   Residente.count().then((numResidentes) => {
     //conta residencias
     Residencia.count().then((numResidencias) => {
-      //conta vagas
-      Quarto.find().then((quartos) => {
-        var vagas = 0;
-        for (var i = 0; i < quartos.length; i++) {
-          vagas += quartos[i].capacidade - quartos[i].membros
-        }
-        res.render("servidor/home", {numResidentes: numResidentes, numResidencias: numResidencias, vagas: vagas})
+      //conta solicitacoes
+      Solicitacao.count().then((numSolicitacoes) => {
+        //conta vagas
+        Quarto.find().then((quartos) => {
+          var vagas = 0;
+          for (var i = 0; i < quartos.length; i++) {
+            vagas += quartos[i].capacidade - quartos[i].membros
+          }
+          res.render("servidor/home", {numResidentes: numResidentes, numResidencias: numResidencias, vagas: vagas, numSolicitacoes: numSolicitacoes})
+        })
       })
     })
   })
