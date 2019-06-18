@@ -44,5 +44,7 @@ const ger_servidores = require("./ger_servidores")
 router.use("/servidores", ger_servidores)
 
 /* Gerencia de solicitacoes */
+const ger_solicitacoes = require("./ger_solicitacoes")
+router.use("/solicitacoes", ger_solicitacoes)
 
 module.exports = router

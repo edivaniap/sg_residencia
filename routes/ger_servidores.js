@@ -12,7 +12,7 @@ const Servidor = mongoose.model("servidores")
 
 /* ROTAS */
 
-/* Gerencia de residentes */
+/* Gerencia de servidores */
 router.get("/", (req, res) => {
   Servidor.find().populate("usuario").sort({criacao: "desc"}).then((servidores) => {
     res.render("servidor/servidores", {servidores: servidores})
@@ -37,16 +37,10 @@ router.get("/deletar/:iduser/:idserv", (req, res) => {
   })
 })
 
-/* abre formulario de cadastro de residente */
+/* abre formulario de cadastro de servidor */
 router.get("/adicionar", (req, res) => {
-  Servidor.find().populate("usuario").sort({criacao: "desc"}).then((servidores) => {
-    res.render("servidor/addservidor", {servidores: servidores})
-  }).catch((err) => {
-    req.flash("error_msg", "Erro ao tentar listar as servidores: " + err)
-    res.redirect("/servidor")
-  })
+    res.render("servidor/addservidor")
 })
-
 
 /* cadastra a residente no banco */
 router.post("/adicionar", (req, res) => {
