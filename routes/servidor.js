@@ -14,11 +14,7 @@ const Quarto = mongoose.model("quartos")
 /* ROTAS */
 
 /* Home */
-// router.get("/", eAdmin, (req, res) => {
-//   res.render("servidor/home")
-// })
-
-router.get("/", (req, res) => {
+router.get("/", eAdmin, (req, res) => {
   //conta residentes
   Residente.count().then((numResidentes) => {
     //conta residencias

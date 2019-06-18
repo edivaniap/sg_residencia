@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const mongoose = require("mongoose")
+const {eAdmin} = require("../helpers/eAdmin")
 const enviar_email = require("./email")
 
 /* CARREGANDO MODELS */
@@ -17,7 +18,7 @@ const Quarto = mongoose.model("quartos")
 /* ROTAS */
 
 /* Gerencia de residentes */
-router.get("/", (req, res) => {
+router.get("/", eAdmin, (req, res) => {
   Residente.find().populate("usuario").populate("quarto").populate("residencia").sort({criacao: "desc"}).then((residentes) => {
     res.render("servidor/residentes", {residentes: residentes})
   }).catch((err) => {
@@ -26,7 +27,7 @@ router.get("/", (req, res) => {
   })
 })
 
-router.get("/deletar/:iduser/:idresi/:idquarto", (req, res) => {
+router.get("/deletar/:iduser/:idresi/:idquarto", eAdmin, (req, res) => {
   Residente.deleteOne({_id: req.params.idresi}).then(() => {
     Usuario.deleteOne({_id: req.params.iduser}).then(() => {
       Quarto.findOne({_id: req.params.idquarto}).then((quarto) => {
@@ -53,7 +54,7 @@ router.get("/deletar/:iduser/:idresi/:idquarto", (req, res) => {
 })
 
 /* abre formulario de cadastro de residente */
-router.get("/adicionar", (req, res) => {
+router.get("/adicionar", eAdmin, (req, res) => {
   Residencia.find().populate({path: "quartos", model: Quarto}).sort({criacao: "desc"}).then((residencias) => {
     res.render("servidor/addresidente", {residencias: residencias})
   }).catch((err) => {
@@ -64,7 +65,7 @@ router.get("/adicionar", (req, res) => {
 
 
 /* cadastra a residente no banco */
-router.post("/adicionar", (req, res) => {
+router.post("/adicionar", eAdmin, (req, res) => {
   var erros = []
 
   /* busca quarto para validar */

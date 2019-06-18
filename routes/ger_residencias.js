@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const mongoose = require("mongoose")
-
+const {eAdmin} = require("../helpers/eAdmin")
 /* CARREGANDO MODELS */
 require("../models/Residencia")
 const Residencia = mongoose.model("residencias")
@@ -11,7 +11,7 @@ const Quarto = mongoose.model("quartos")
 /* ROTAS */
 
 /* Gerencia de residencias */
-router.get("/", (req, res) => {
+router.get("/", eAdmin, (req, res) => {
   Residencia.find().populate({path: "quartos", model: Quarto}).sort({criacao: "desc"}).then((residencias) => {
     res.render("servidor/residencias", {residencias: residencias})
   }).catch((err) => {
@@ -21,12 +21,12 @@ router.get("/", (req, res) => {
 })
 
 /* abre formulario de cadastro */
-router.get("/adicionar", (req, res) => {
+router.get("/adicionar", eAdmin, (req, res) => {
   res.render("servidor/addresidencia")
 })
 
 /* cadastra a residencia no banco */
-router.post("/adicionar", (req, res) => {
+router.post("/adicionar", eAdmin, (req, res) => {
   var erros = []
 
   if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null) {
@@ -99,7 +99,7 @@ router.post("/editar", (req, res) => {
   }
 })
 
-router.get("/deletar/:id", (req, res) => {
+router.get("/deletar/:id", eAdmin, (req, res) => {
     Residencia.deleteOne({_id: req.params.id}).then((residencia) => {
     req.flash("success_msg", "Residência deletada com sucesso")
     res.redirect("/servidor/residencias")
@@ -109,7 +109,7 @@ router.get("/deletar/:id", (req, res) => {
   })
 })
 
-router.get("/adicionar_quarto/:id", (req, res) => {
+router.get("/adicionar_quarto/:id", eAdmin, (req, res) => {
     Residencia.findOne({_id: req.params.id}).then((residencia) => {
     res.render("servidor/addquarto", {residencia: residencia})
   }).catch((err) => {
@@ -119,7 +119,7 @@ router.get("/adicionar_quarto/:id", (req, res) => {
 })
 
 /* cadastra a residencia no banco */
-router.post("/adicionar_quarto", (req, res) => {
+router.post("/adicionar_quarto", eAdmin, (req, res) => {
   var erros = []
 
   if(!req.body.titulo || typeof req.body.titulo == undefined || req.body.titulo == null) {
