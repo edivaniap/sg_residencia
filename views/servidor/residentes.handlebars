@@ -1,8 +1,8 @@
 <section id="breadcrumb">
     <div class="container">
       <ol class="breadcrumb">
-        <li><a href="admin.html">Home</a></li>
-        <li class="active">Gerenciar Residências</li>
+        <li><a href="/servidor">▷ Início</a></li>
+        <li class="active"><a href="/servidor/residentes">▷ Gerenciar Residentes</a></li>
       </ol>
     </div>
   </section>
@@ -13,12 +13,17 @@
         <div class="col-md-3">
           <img class="img-responsive" src="/imgs/avatar2.png" alt>
           <div class="list-group">
-            <a href="admin.html" class="list-group-item active main-color-bg">
-              <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Olá, Administrador
-            </a>
-            <a href="residencias.html" class="list-group-item"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Gerenciar Residências</a>
-            <a href="residentes.html" class="list-group-item"><span class="glyphicon glyphicon-user " aria-hidden="true"></span> Gerenciar Residentes </a>
-            <a href="solicitacoes.html" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Gerenciar Solicitações</a>
+            <div class="list-group-item active main-color-bg">
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <b>{{user.nome}}</b>
+            </div>
+            <div class="list-group-item active main-color-bg">
+              <span class="glyphicon glyphicon-education" aria-hidden="true"></span> <b>{{user.matricula}}</b>
+            </div>
+            <a href="/servidor/residencias" class="list-group-item"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Gerenciar Residências</a>
+            <a href="/servidor/residentes" class="list-group-item"><span class="glyphicon glyphicon-user " aria-hidden="true"></span> Gerenciar Residentes </a>
+            <a href="/solicitacoes/servidores" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Gerenciar Solicitações</a>
+            <a href="/servidor/servidores" class="list-group-item"><span class="glyphicon glyphicon-user " aria-hidden="true"></span> Gerenciar Servidores </a>
+            <a href="/usuario/logout" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Sair</a>
           </div>
 
       </div>

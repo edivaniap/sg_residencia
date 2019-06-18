@@ -24,7 +24,6 @@ router.get("/logout", (req, res) => {
 router.post("/login", (req, res, next) => {
   Usuario.findOne({matricula: req.body.matricula}).then((usuario) => {
     if(usuario) {
-      console.log("--------------e adm"+usuario.eAdmin);
       //redireciona pra autenticação de servidor
       if(usuario.eAdmin) {
         passport.authenticate("local", {
