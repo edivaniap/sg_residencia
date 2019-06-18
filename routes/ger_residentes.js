@@ -21,16 +21,27 @@ router.get("/", (req, res) => {
   Residente.find().populate("usuario").populate("quarto").populate("residencia").sort({criacao: "desc"}).then((residentes) => {
     res.render("servidor/residentes", {residentes: residentes})
   }).catch((err) => {
-    req.flash("error_msg", "Erro ao tentar listar as residentes: " + err)
+    req.flash("error_msg", "Erro ao tentar listar os residentes: " + err)
     res.redirect("/servidor")
   })
 })
 
-router.get("/deletar/:iduser/:idresi", (req, res) => {
+router.get("/deletar/:iduser/:idresi/:idquarto", (req, res) => {
   Residente.deleteOne({_id: req.params.idresi}).then(() => {
     Usuario.deleteOne({_id: req.params.iduser}).then(() => {
-      req.flash("success_msg", "Residente deletada com sucesso")
-      res.redirect("/servidor/residentes")
+      Quarto.findOne({_id: req.params.idquarto}).then((quarto) => {
+        //atualiza numero de membros do quarto apos deletar usuario
+        quarto.membros = quarto.membros - 1,
+        quarto.atualizacao = Date.now()
+
+        quarto.save().then(() => {
+          req.flash("success_msg", "Residente deletado com sucesso")
+          res.redirect("/servidor/residentes")
+        }).catch((err) => {
+          req.flash("error_msg", "Erro ao tentar atualizar o numero de membros do quarto do residente deletado: " + err)
+          res.redirect("/servidor/residentes")
+        })
+      })
     }).catch((err) => {
       req.flash("error_msg", "Erro ao tentar encontrar usuario de residente: " + err)
       res.redirect("/servidor/residentes")
@@ -46,7 +57,7 @@ router.get("/adicionar", (req, res) => {
   Residencia.find().populate({path: "quartos", model: Quarto}).sort({criacao: "desc"}).then((residencias) => {
     res.render("servidor/addresidente", {residencias: residencias})
   }).catch((err) => {
-    req.flash("error_msg", "Erro ao tentar listar as residencias: " + err)
+    req.flash("error_msg", "Erro ao tentar listar as residentes: " + err)
     res.redirect("/servidor")
   })
 })
@@ -77,7 +88,7 @@ router.post("/adicionar", (req, res) => {
         //validando matricula
         Usuario.findOne({matricula: req.body.matricula}).then((usuario) => {
           if(usuario != null) {
-            erros.push({texto: "Residente com matrícula " + req.body.matricula + " já existe"})
+            erros.push({texto: "Usuario com matrícula " + req.body.matricula + " já existe"})
             Residencia.find().populate({path: "quartos", model: Quarto}).sort({criacao: "desc"}).then((residencias) => {
               res.render("servidor/addresidente", {residencias: residencias, erros: erros})
             }).catch((err) => {
@@ -121,7 +132,7 @@ router.post("/adicionar", (req, res) => {
                   var corpo_email = "<div style='text-align: center; font-family: sans-serif; border: 1px solid gray; border-radius: 25px; padding: 20px; margin: 0px 50px 20px 50px;'>"
                   corpo_email += "<h2>" + req.body.nome + ", bem vindo(a) ao Sistema de Gerenciamento de Residentes</h2>"
                   corpo_email += "<h3>Você foi alocado no quarto <b>" + quarto.titulo + "</b> da Residência <b>" + quarto.residencia.nome + "</b>.<br> No nosso software você poderá solicitar e acompanhar serviços da sua residência.<br><br>"
-                  corpo_email += "Defina sua senha visitando o link: localhost:8082/residente/definir_senha/"+lastUsuario._id+" <br><br>"
+                  corpo_email += "Defina sua senha visitando o link: localhost:8082/usuario/definir_senha/"+lastUsuario._id+" <br><br>"
                   corpo_email += "Após fazer isto, você poderá autenticar-se no sistema com sua matrícula e senha!</h3></div>"
                   enviar_email(req.body.email, assunto_email, corpo_email)
                   req.flash("success_msg", "Residente adicionado com sucesso! Um e-mail foi enviado para que ele(a) registre sua senha")

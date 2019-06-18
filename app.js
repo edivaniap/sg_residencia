@@ -6,6 +6,7 @@ const mongoose = require("mongoose")
 const app = express()
 const servidor = require("./routes/servidor")
 const residente = require("./routes/residente")
+const usuario = require("./routes/usuario")
 const path = require("path")
 const session = require("express-session")
 const flash = require("connect-flash")
@@ -63,6 +64,8 @@ app.get("/", (req, res) => {
 app.use("/servidor", servidor)
 
 app.use("/residente", residente)
+
+app.use("/usuario", usuario)
 
 /* LISTENER */
 const PORT = 8082

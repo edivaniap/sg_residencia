@@ -43,6 +43,10 @@ router.use("/residencias", ger_residencias)
 const ger_residentes = require("./ger_residentes")
 router.use("/residentes", ger_residentes)
 
+/* Gerencia de servidores */
+const ger_servidores = require("./ger_servidores")
+router.use("/servidores", ger_servidores)
+
 /* Gerencia de solicitacoes */
 
 module.exports = router
