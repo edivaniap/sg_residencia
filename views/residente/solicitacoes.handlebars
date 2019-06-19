@@ -2,6 +2,7 @@
   <div class="container">
     <ol class="breadcrumb">
       <li><a href="/residente">▷ Início</a></li>
+      <li class="active"><a href="/residente/acompanhar_solicitacoes">▷ Suas solicitações</a></li>
     </ol>
   </div>
 </section>
@@ -10,7 +11,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <img class="img-responsive" src="imgs/avatar2.png" alt>
+        <img class="img-responsive" src="/imgs/avatar2.png" alt>
         <div class="list-group">
           <div class="list-group-item active main-color-bg">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <b>{{user.nome}}</b>
@@ -32,11 +33,23 @@
             <h3 class="panel-title">Lista de Solicitações</h3>
           </div>
           <div class="panel-body">
-            <form action="/residente/acompanhar_solicitacoes" method="post">
-              <input type="hidden" name="id_usuario"  value="{{user._id}}">
-              <button type="submit" id="ir" name="ir" class="btn btn-primary">Suas Solicitações</button>
-            </form>
+            {{#each solicitacoes}}
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">{{solicitanteUsuario.nome}} - {{solicitanteResidencia.nome}} - {{solicitanteQuarto.titulo}}</h3>
+              </div>
+              <div class="panel-body">
+                <b>Status:</b> {{status}} <br><br>
+                <b>Tipo do serviço:</b> {{tipoServico}} <br><br>
+                <b>Descrição: </b>{{descricao}}<br><br>
+                <b>Funcionário: </b>{{funcionario}}
+              </div>
+              <div class="panel-footer"><small><b>Data </b> {{criacao}}<br> <b>Ultima atualizacao </b> {{atualizacao}}</small></div>
+            </div>
             <br><br>
+            {{else}}
+            <p>Não há solicitação em andamento</p>
+            {{/each}}
           </div>
         </div>
       </div>

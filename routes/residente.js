@@ -18,6 +18,16 @@ router.get("/", eComum, (req, res) => {
   res.render("residente/home")
 })
 
+router.post("/acompanhar_solicitacoes", eComum, (req, res) => {
+  Solicitacao.find({solicitanteUsuario: req.body.id_usuario}).populate("solicitanteUsuario").populate("solicitanteResidencia").populate("solicitanteQuarto").then((solicitacoes) => {
+      res.render("residente/solicitacoes", {solicitacoes: solicitacoes})
+  }).catch((err) => {
+    req.flash("error_msg", "Erro ao tentar Solicitações: " + err)
+    res.redirect("/servidor/solicitacoes")
+  })
+})
+
+
 router.get("/solicitar", eComum, (req, res) => {
   res.render("residente/addsolicitacao")
 })
